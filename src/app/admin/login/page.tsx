@@ -25,18 +25,23 @@ export default function AdminLoginPage() {
         body: JSON.stringify({ username, password }),
       });
 
-      const data = await res.json();
+      let data: any = {};
+      try {
+        data = await res.json();
+      } catch {
+        // Fallback for non-JSON errors
+      }
 
       if (!res.ok) {
-        setError(data.error || 'Invalid credentials');
+        setError(data.error || `Authentication failed (${res.status}). Please check credentials.`);
         setLoading(false);
         return;
       }
 
       router.push('/admin');
       router.refresh();
-    } catch {
-      setError('Connection error. Please try again.');
+    } catch (err: any) {
+      setError(err?.message || 'Connection error. Please try again.');
       setLoading(false);
     }
   };

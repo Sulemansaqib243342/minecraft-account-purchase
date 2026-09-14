@@ -3,16 +3,23 @@ import path from 'path';
 import fs from 'fs';
 import bcrypt from 'bcryptjs';
 
-const dataDir = path.join(process.cwd(), 'data');
-if (!fs.existsSync(dataDir)) {
+// Vercel serverless environment has a read-only filesystem except /tmp
+const isVercel = Boolean(process.env.VERCEL);
+const dataDir = isVercel ? '/tmp' : path.join(process.cwd(), 'data');
+
+if (!isVercel && !fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, { recursive: true });
 }
 
 const dbPath = path.join(dataDir, 'database.db');
 const db = new Database(dbPath);
 
-// Enable WAL mode for concurrency and performance
-db.pragma('journal_mode = WAL');
+// Enable WAL mode on local, or MEMORY/DELETE mode on Vercel serverless /tmp
+if (isVercel) {
+  db.pragma('journal_mode = MEMORY');
+} else {
+  db.pragma('journal_mode = WAL');
+}
 
 // Initialize database schema
 db.exec(`
