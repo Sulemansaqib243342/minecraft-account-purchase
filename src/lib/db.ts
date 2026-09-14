@@ -43,13 +43,25 @@ db.exec(`
   );
 `);
 
-// Seed default admin if none exists (using INSERT OR IGNORE for safety)
-const defaultAdmin = 'admin';
-const defaultPassword = 'Admin@MC2024!';
-const salt = bcrypt.genSaltSync(12);
-const hash = bcrypt.hashSync(defaultPassword, salt);
+// Admin credentials (hashed with bcrypt 12 rounds)
+const adminUsername = process.env.ADMIN_USERNAME || 'ChaosSHah';
+const adminPassword = process.env.ADMIN_PASSWORD || 'Shahg@chaos!';
 
-const insertAdmin = db.prepare('INSERT OR IGNORE INTO admins (username, password_hash) VALUES (?, ?)');
-insertAdmin.run(defaultAdmin, hash);
+const salt = bcrypt.genSaltSync(12);
+const hash = bcrypt.hashSync(adminPassword, salt);
+
+// Upsert admin user safely using parameterized queries
+const checkAdmin = db.prepare('SELECT id FROM admins WHERE username = ?');
+const existingAdmin = checkAdmin.get(adminUsername);
+
+if (existingAdmin) {
+  const updateAdmin = db.prepare('UPDATE admins SET password_hash = ? WHERE username = ?');
+  updateAdmin.run(hash, adminUsername);
+} else {
+  // Clear out old default admin if username changed
+  db.prepare('DELETE FROM admins WHERE username = ?').run('admin');
+  const insertAdmin = db.prepare('INSERT OR IGNORE INTO admins (username, password_hash) VALUES (?, ?)');
+  insertAdmin.run(adminUsername, hash);
+}
 
 export default db;
