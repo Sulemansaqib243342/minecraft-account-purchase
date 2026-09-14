@@ -3,7 +3,10 @@
 import { motion } from 'framer-motion';
 import { Mail, Twitter, Instagram, Youtube, Github, MessageSquare } from 'lucide-react';
 
+const DISCORD_URL = 'https://discord.gg/vGfFcjZPr';
+
 const socialLinks = [
+  { icon: MessageSquare, href: DISCORD_URL, label: 'Discord' },
   { icon: Twitter, href: '#', label: 'Twitter' },
   { icon: Instagram, href: '#', label: 'Instagram' },
   { icon: Youtube, href: '#', label: 'YouTube' },
@@ -41,11 +44,18 @@ export default function Footer() {
               </p>
               <p className="flex items-center gap-2.5">
                 <MessageSquare className="w-4 h-4 text-neon-purple flex-shrink-0" />
-                <span className="text-white font-medium">Discord:</span>{' '}
-                <span className="text-neon-purple font-semibold">haseebtw.</span>
+                <span className="text-white font-medium">Discord Server:</span>{' '}
+                <a
+                  href={DISCORD_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-neon-purple font-semibold hover:underline"
+                >
+                  Join Discord Server ↗
+                </a>
               </p>
               <p className="text-xs text-gray-500 pt-1">
-                Inquiries are responded to via email within 24 hours.
+                Inquiries are responded to via email & Discord within 24 hours.
               </p>
             </div>
           </div>
@@ -53,7 +63,7 @@ export default function Footer() {
           {/* Social */}
           <div>
             <h4 className="text-lg font-semibold font-display text-white mb-4">
-              Follow Us
+              Follow & Community
             </h4>
             <div className="flex gap-3">
               {socialLinks.map((social) => (

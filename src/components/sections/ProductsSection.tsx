@@ -325,7 +325,7 @@ export default function ProductsSection() {
             And Many More Products Available!
           </h3>
           <p className="text-gray-300 text-sm leading-relaxed max-w-xl mx-auto">
-            If you need any custom items, unlisted software, or bulk deals, just DM us on Discord (<span className="text-neon-purple font-semibold">haseebtw.</span>) or send an Email Inquiry!
+            If you need any custom items, unlisted software, or bulk deals, just join our <a href="https://discord.gg/vGfFcjZPr" target="_blank" rel="noopener noreferrer" className="text-neon-purple font-semibold hover:underline">Discord Server ↗</a> or send an Email Inquiry!
           </p>
           <div className="pt-2">
             <button
