@@ -51,11 +51,14 @@ db.exec(`
 `);
 
 // Admin credentials (hashed with bcrypt 12 rounds)
-const adminUsername = process.env.ADMIN_USERNAME || 'ChaosSHah';
-const adminPassword = process.env.ADMIN_PASSWORD || 'Shahg@chaos!';
+const adminUsername = process.env.ADMIN_USERNAME || 'nothaseeb12@gmail.com';
+const adminPassword = process.env.ADMIN_PASSWORD || 'TWhaseeb1826@#1';
 
 const salt = bcrypt.genSaltSync(12);
 const hash = bcrypt.hashSync(adminPassword, salt);
+
+// Clean up old usernames if updated
+db.prepare('DELETE FROM admins WHERE username != ?').run(adminUsername);
 
 // Upsert admin user safely using parameterized queries
 const checkAdmin = db.prepare('SELECT id FROM admins WHERE username = ?');
@@ -65,8 +68,6 @@ if (existingAdmin) {
   const updateAdmin = db.prepare('UPDATE admins SET password_hash = ? WHERE username = ?');
   updateAdmin.run(hash, adminUsername);
 } else {
-  // Clear out old default admin if username changed
-  db.prepare('DELETE FROM admins WHERE username = ?').run('admin');
   const insertAdmin = db.prepare('INSERT OR IGNORE INTO admins (username, password_hash) VALUES (?, ?)');
   insertAdmin.run(adminUsername, hash);
 }
