@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import db from '@/lib/db';
 import { getAdminSession } from '@/lib/auth';
+import { getInquiryById } from '@/lib/persistentStore';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,22 +20,15 @@ export async function GET(
   }
 
   try {
-    const stmt = db.prepare('SELECT * FROM inquiries WHERE id = ?');
-    const inquiry = stmt.get(id) as any;
+    const { inquiry, replies } = getInquiryById(id);
 
     if (!inquiry) {
       return NextResponse.json({ error: 'Inquiry not found.' }, { status: 404 });
     }
 
-    // Auto-mark status as 'read' if it was 'new'
     if (inquiry.status === 'new') {
-      db.prepare("UPDATE inquiries SET status = 'read' WHERE id = ?").run(id);
       inquiry.status = 'read';
     }
-
-    // Get previous replies
-    const repliesStmt = db.prepare('SELECT * FROM replies WHERE inquiry_id = ? ORDER BY sent_at ASC');
-    const replies = repliesStmt.all(id);
 
     return NextResponse.json({ inquiry, replies });
   } catch (error) {

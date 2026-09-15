@@ -31,9 +31,9 @@ const faqs = [
   },
   {
     icon: HelpCircle,
-    question: 'How can I check the status of my order?',
+    question: 'How will staff contact me after I submit a request?',
     answer:
-      'You can use our Track Order page (/track) and enter your Email or Inquiry ID to view real-time updates and staff replies instantly.',
+      'Our support staff receives your request instantly and sends a direct response to your provided email address. You can also join our Discord Server to chat with staff directly!',
   },
 ];
 

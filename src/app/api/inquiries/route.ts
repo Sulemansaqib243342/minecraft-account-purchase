@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import db from '@/lib/db';
 import { sendNotificationToAdmin } from '@/lib/email';
+import { saveNewInquiry } from '@/lib/persistentStore';
 
 // In-memory rate limiting tracker (max 5 requests per minute per IP/Email)
 const rateLimitMap = new Map<string, { count: number; expiresAt: number }>();
@@ -51,14 +51,10 @@ export async function POST(request: Request) {
       );
     }
 
-    // Insert into SQLite database
-    const stmt = db.prepare(`
-      INSERT INTO inquiries (name, email, subject, message, product, status)
-      VALUES (?, ?, ?, ?, ?, 'new')
-    `);
-    const result = stmt.run(name, email, subject || '', message, product || '');
+    // Save inquiry to persistent store & SQLite
+    const savedInquiry = saveNewInquiry({ name, email, subject, message, product });
 
-    // Send async email notification to admin via Resend
+    // Send async email notification to admin via Nodemailer Gmail SMTP
     sendNotificationToAdmin({ name, email, subject, message, product }).catch((err) =>
       console.error('Background admin notification error:', err)
     );
@@ -66,7 +62,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       success: true,
       message: 'Your inquiry has been submitted successfully!',
-      inquiryId: result.lastInsertRowid,
+      inquiryId: savedInquiry.id,
     });
   } catch (error) {
     console.error('Error submitting inquiry:', error);

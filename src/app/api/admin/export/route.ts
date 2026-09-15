@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import db from '@/lib/db';
 import { getAdminSession } from '@/lib/auth';
+import { getAllInquiries } from '@/lib/persistentStore';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,8 +11,7 @@ export async function GET() {
   }
 
   try {
-    const stmt = db.prepare('SELECT id, name, email, subject, product, status, created_at, message FROM inquiries ORDER BY created_at DESC');
-    const rows = stmt.all();
+    const rows = getAllInquiries();
 
     // Generate CSV Content
     const headers = ['ID', 'Name', 'Email', 'Subject', 'Product', 'Status', 'Date', 'Message'];

@@ -35,9 +35,6 @@ export default function Navbar() {
           <a href="#faq" className="hover:text-white transition-colors">
             FAQ
           </a>
-          <Link href="/track" className="text-neon-cyan font-semibold hover:underline">
-            Track Order 📦
-          </Link>
           <a href="#notice" className="hover:text-white transition-colors">
             Notice
           </a>

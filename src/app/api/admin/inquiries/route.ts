@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import db from '@/lib/db';
 import { getAdminSession } from '@/lib/auth';
+import { getAllInquiries } from '@/lib/persistentStore';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,31 +12,17 @@ export async function GET(request: Request) {
 
   try {
     const { searchParams } = new URL(request.url);
-    const statusFilter = searchParams.get('status');
+    const statusFilter = searchParams.get('status') || undefined;
 
-    let query = 'SELECT * FROM inquiries';
-    const params: string[] = [];
+    const inquiries = getAllInquiries(statusFilter);
+    const allInquiries = getAllInquiries();
 
-    if (statusFilter && ['new', 'read', 'replied'].includes(statusFilter)) {
-      query += ' WHERE status = ?';
-      params.push(statusFilter);
-    }
-
-    query += ' ORDER BY created_at DESC';
-
-    const stmt = db.prepare(query);
-    const inquiries = stmt.all(...params);
-
-    // Get count statistics
-    const statsStmt = db.prepare(`
-      SELECT 
-        COUNT(*) as total,
-        SUM(CASE WHEN status = 'new' THEN 1 ELSE 0 END) as newCount,
-        SUM(CASE WHEN status = 'read' THEN 1 ELSE 0 END) as readCount,
-        SUM(CASE WHEN status = 'replied' THEN 1 ELSE 0 END) as repliedCount
-      FROM inquiries
-    `);
-    const stats = statsStmt.get() || { total: 0, newCount: 0, readCount: 0, repliedCount: 0 };
+    const stats = {
+      total: allInquiries.length,
+      newCount: allInquiries.filter((i) => i.status === 'new').length,
+      readCount: allInquiries.filter((i) => i.status === 'read').length,
+      repliedCount: allInquiries.filter((i) => i.status === 'replied').length,
+    };
 
     return NextResponse.json({
       inquiries,

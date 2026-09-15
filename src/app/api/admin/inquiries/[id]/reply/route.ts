@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import db from '@/lib/db';
 import { getAdminSession } from '@/lib/auth';
 import { sendReplyEmail } from '@/lib/email';
+import { getInquiryById, saveNewReply } from '@/lib/persistentStore';
 
 export const dynamic = 'force-dynamic';
 
@@ -29,26 +29,18 @@ export async function POST(
       );
     }
 
-    // Get the inquiry
-    const inquiryStmt = db.prepare('SELECT * FROM inquiries WHERE id = ?');
-    const inquiry = inquiryStmt.get(id) as { id: number; email: string; subject?: string; message: string; name: string } | undefined;
+    const { inquiry } = getInquiryById(id);
 
     if (!inquiry) {
       return NextResponse.json({ error: 'Inquiry not found.' }, { status: 404 });
     }
 
-    // Send email via Resend
-    const subject = inquiry.subject ? `Re: ${inquiry.subject}` : `Response to your inquiry - Minecraft Account Purchase`;
+    // Send email via Nodemailer Gmail SMTP
+    const subject = inquiry.subject ? `Re: ${inquiry.subject}` : `Response to your inquiry - Gaming Zone Store`;
     const emailResult = await sendReplyEmail(inquiry.email, subject, replyText, inquiry.message);
 
-    // Record reply in SQLite database
-    const insertReply = db.prepare(
-      'INSERT INTO replies (inquiry_id, message) VALUES (?, ?)'
-    );
-    insertReply.run(id, replyText.trim());
-
-    // Update status of inquiry to 'replied'
-    db.prepare("UPDATE inquiries SET status = 'replied' WHERE id = ?").run(id);
+    // Save reply to persistent store & SQLite
+    saveNewReply(id, replyText.trim());
 
     if (!emailResult.success) {
       return NextResponse.json({
