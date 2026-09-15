@@ -1,43 +1,34 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Mail, Twitter, Instagram, Youtube, Github, MessageSquare } from 'lucide-react';
+import { Mail, MessageSquare } from 'lucide-react';
 
 const DISCORD_URL = 'https://discord.gg/vGfFcjZPr';
-
-const socialLinks = [
-  { icon: MessageSquare, href: DISCORD_URL, label: 'Discord' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Youtube, href: '#', label: 'YouTube' },
-  { icon: Github, href: '#', label: 'GitHub' },
-];
 
 export default function Footer() {
   return (
     <footer className="relative z-10 py-12 px-4 border-t border-white/10">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+      <div className="max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10 items-start">
           {/* Brand */}
           <div>
             <h3 className="text-xl font-bold font-display text-neon-green mb-3 text-glow-green">
               Minecraft Account Purchase
             </h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Your trusted source for premium gaming accounts. Fast, affordable,
+            <p className="text-gray-400 text-sm leading-relaxed max-w-md">
+              Your trusted source for premium gaming accounts, tools & subscriptions. Fast, affordable,
               and secure transactions via email & Discord support.
             </p>
           </div>
 
-          {/* Contact */}
+          {/* Contact & Support */}
           <div>
             <h4 className="text-lg font-semibold font-display text-white mb-4">
-              Support Info
+              Support & Community
             </h4>
             <div className="space-y-3 text-gray-400 text-sm">
               <p className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-neon-cyan flex-shrink-0" />
-                <span className="text-white font-medium">Email:</span>{' '}
+                <span className="text-white font-medium">Email Support:</span>{' '}
                 <a href="mailto:zaydengrey172@gmail.com" className="text-neon-cyan hover:underline">
                   zaydengrey172@gmail.com
                 </a>
@@ -49,41 +40,15 @@ export default function Footer() {
                   href={DISCORD_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neon-purple font-semibold hover:underline"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-neon-purple/15 border border-neon-purple/30 text-neon-purple font-semibold hover:bg-neon-purple/25 transition-all text-xs"
                 >
+                  <MessageSquare className="w-3.5 h-3.5" />
                   Join Discord Server ↗
                 </a>
               </p>
               <p className="text-xs text-gray-500 pt-1">
                 Inquiries are responded to via email & Discord within 24 hours.
               </p>
-            </div>
-          </div>
-
-          {/* Social */}
-          <div>
-            <h4 className="text-lg font-semibold font-display text-white mb-4">
-              Follow & Community
-            </h4>
-            <div className="flex gap-3">
-              {socialLinks.map((social) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  target={social.href.startsWith('http') ? '_blank' : undefined}
-                  rel={
-                    social.href.startsWith('http')
-                      ? 'noopener noreferrer'
-                      : undefined
-                  }
-                  whileHover={{ scale: 1.2, y: -3 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="w-10 h-10 rounded-lg glass border border-white/10 flex items-center justify-center text-gray-400 hover:text-neon-green hover:border-neon-green/30 hover:shadow-neon-green transition-all duration-300"
-                  aria-label={social.label}
-                >
-                  <social.icon className="w-5 h-5" />
-                </motion.a>
-              ))}
             </div>
           </div>
         </div>
