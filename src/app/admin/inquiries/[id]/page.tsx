@@ -277,6 +277,59 @@ export default function InquiryDetailPage() {
           </div>
         )}
 
+        {/* 1-Click Quick Reply Templates */}
+        <div className="mb-4">
+          <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">
+            ⚡ Quick-Reply Templates (Click to Insert):
+          </label>
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() =>
+                setReplyText(
+                  `Hi ${inquiry.name},\n\nYour requested account credentials and access details have been processed!\n\nCredentials Details:\n-------------------\nProduct: ${inquiry.product || inquiry.subject || 'Requested Item'}\nStatus: Delivered & Active\n\nIf you have any questions, feel free to reply to this email or join our Discord.\n\nBest regards,\nGaming Zone Support Team`
+                )
+              }
+              className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-neon-cyan/50 text-xs text-gray-300 hover:text-white transition-all"
+            >
+              🔑 Account Credentials
+            </button>
+            <button
+              type="button"
+              onClick={() =>
+                setReplyText(
+                  `Hi ${inquiry.name},\n\nThank you for reaching out regarding your custom request for ${inquiry.product || 'Custom Item'}.\n\nWe can fulfill your order! Please let us know if you would like to proceed so we can provide payment details.\n\nBest regards,\nGaming Zone Support Team`
+                )
+              }
+              className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-neon-cyan/50 text-xs text-gray-300 hover:text-white transition-all"
+            >
+              ✨ Custom Quote
+            </button>
+            <button
+              type="button"
+              onClick={() =>
+                setReplyText(
+                  `Hi ${inquiry.name},\n\nTo complete your purchase for ${inquiry.product || 'your order'}, please confirm your preferred payment method (Crypto, Card, Local Wallet).\n\nOnce payment is verified, your item will be delivered immediately.\n\nBest regards,\nGaming Zone Support Team`
+                )
+              }
+              className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-neon-cyan/50 text-xs text-gray-300 hover:text-white transition-all"
+            >
+              💳 Payment Info
+            </button>
+            <button
+              type="button"
+              onClick={() =>
+                setReplyText(
+                  `Hi ${inquiry.name},\n\nAs part of your warranty support, we have processed a replacement for your item (${inquiry.product || 'Order'}).\n\nReplacement credentials have been attached. Thank you for your patience!\n\nBest regards,\nGaming Zone Support Team`
+                )
+              }
+              className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-neon-cyan/50 text-xs text-gray-300 hover:text-white transition-all"
+            >
+              🛡️ Replacement Issued
+            </button>
+          </div>
+        </div>
+
         <form onSubmit={handleSendReply} className="space-y-4">
           <div>
             <textarea

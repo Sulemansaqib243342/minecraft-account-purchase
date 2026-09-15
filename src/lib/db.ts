@@ -48,6 +48,10 @@ db.exec(`
     sent_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (inquiry_id) REFERENCES inquiries(id) ON DELETE CASCADE
   );
+
+  CREATE INDEX IF NOT EXISTS idx_inquiries_status ON inquiries(status);
+  CREATE INDEX IF NOT EXISTS idx_inquiries_email ON inquiries(email);
+  CREATE INDEX IF NOT EXISTS idx_inquiries_created_at ON inquiries(created_at);
 `);
 
 // Admin credentials (hashed with bcrypt 12 rounds)

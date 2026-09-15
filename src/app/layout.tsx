@@ -17,6 +17,37 @@ export const metadata: Metadata = {
   title: 'Gaming Zone | Premium Accounts, Tools & Custom Orders',
   description:
     'Your ultimate marketplace for premium gaming accounts, digital tools, subscriptions, VCCs & custom orders.',
+  keywords: [
+    'Gaming Zone',
+    'Minecraft Accounts',
+    'Xbox Game Pass',
+    'Steam Accounts',
+    'VCC',
+    'Virtual Credit Card',
+    'Hotmail Tools',
+    'Netflix Accounts',
+    'Crunchyroll Premium',
+    'Custom Order Gaming',
+  ],
+  openGraph: {
+    title: 'Gaming Zone | Premium Gaming Accounts & Digital Tools',
+    description:
+      'Buy premium gaming accounts, VCCs, digital tools, and subscriptions with instant delivery & custom order support.',
+    url: 'https://gammingzone.vercel.app',
+    siteName: 'Gaming Zone Store',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Gaming Zone | Premium Gaming Accounts & Digital Tools',
+    description:
+      'Instant delivery on Xbox Game Pass, Steam, Minecraft, Netflix, VCCs & Custom Orders.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

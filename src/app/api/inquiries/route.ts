@@ -2,10 +2,38 @@ import { NextResponse } from 'next/server';
 import db from '@/lib/db';
 import { sendNotificationToAdmin } from '@/lib/email';
 
+// In-memory rate limiting tracker (max 5 requests per minute per IP/Email)
+const rateLimitMap = new Map<string, { count: number; expiresAt: number }>();
+
+function isRateLimited(key: string): boolean {
+  const now = Date.now();
+  const record = rateLimitMap.get(key);
+
+  if (!record || now > record.expiresAt) {
+    rateLimitMap.set(key, { count: 1, expiresAt: now + 60 * 1000 });
+    return false;
+  }
+
+  if (record.count >= 5) {
+    return true;
+  }
+
+  record.count += 1;
+  return false;
+}
+
 export async function POST(request: Request) {
   try {
+    const ip = request.headers.get('x-forwarded-for') || 'unknown';
     const body = await request.json();
     const { name, email, subject, message, product } = body;
+
+    if (isRateLimited(`${ip}:${email}`)) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please wait a minute before submitting again.' },
+        { status: 429 }
+      );
+    }
 
     if (!name || !email || !message) {
       return NextResponse.json(

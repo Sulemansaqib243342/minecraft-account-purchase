@@ -4,6 +4,7 @@ import ProductsSection from '@/components/sections/ProductsSection';
 import CustomPurchaseSection from '@/components/sections/CustomPurchaseSection';
 import NoticeSection from '@/components/sections/NoticeSection';
 import FeaturesSection from '@/components/sections/FeaturesSection';
+import FaqSection from '@/components/sections/FaqSection';
 import Footer from '@/components/sections/Footer';
 
 const ParticleBackground = dynamic(
@@ -29,6 +30,7 @@ export default function Home() {
       <CustomPurchaseSection />
       <NoticeSection />
       <FeaturesSection />
+      <FaqSection />
       <Footer />
     </main>
   );

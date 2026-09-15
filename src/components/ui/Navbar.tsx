@@ -30,13 +30,16 @@ export default function Navbar() {
             Products
           </a>
           <a href="#custom" className="hover:text-white transition-colors">
-            Contact & Custom Order
+            Custom Order
           </a>
+          <a href="#faq" className="hover:text-white transition-colors">
+            FAQ
+          </a>
+          <Link href="/track" className="text-neon-cyan font-semibold hover:underline">
+            Track Order 📦
+          </Link>
           <a href="#notice" className="hover:text-white transition-colors">
             Notice
-          </a>
-          <a href="#features" className="hover:text-white transition-colors">
-            Features
           </a>
         </div>
 
