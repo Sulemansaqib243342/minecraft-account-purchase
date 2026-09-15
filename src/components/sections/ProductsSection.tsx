@@ -335,19 +335,19 @@ export default function ProductsSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass rounded-2xl p-6 md:p-8 border border-neon-cyan/30 text-center max-w-3xl mx-auto space-y-3"
+            className="glass rounded-2xl p-6 md:p-8 border border-neon-cyan/40 text-center max-w-3xl mx-auto space-y-3 bg-gradient-to-r from-neon-purple/10 via-neon-cyan/10 to-neon-green/10"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-cyan/10 text-neon-cyan text-xs font-semibold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-cyan/15 border border-neon-cyan/30 text-neon-cyan text-xs font-semibold uppercase tracking-wider">
               <Sparkles className="w-4 h-4 text-neon-cyan" />
-              Looking for something else?
+              Custom Deals & Unlisted Items
             </div>
-            <h3 className="text-xl md:text-2xl font-bold font-display text-white">
-              And Many More Products Available!
+            <h3 className="text-xl md:text-3xl font-bold font-display text-white">
+              ✨ Or You Can Make A Custom Order Too!
             </h3>
             <p className="text-gray-300 text-sm leading-relaxed max-w-xl mx-auto">
-              If you need any custom items, unlisted software, or bulk deals, just join our <a href="https://discord.gg/vGfFcjZPr" target="_blank" rel="noopener noreferrer" className="text-neon-purple font-semibold hover:underline">Discord Server ↗</a> or send an Email Inquiry!
+              Looking for a specific game account, unlisted tool, bulk package, or custom digital service? We fulfill custom requests fast!
             </p>
-            <div className="pt-2">
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
               <button
                 onClick={() => handleOpenModal('Custom Item / Unlisted Tool')}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-neon-cyan text-dark-900 font-bold text-xs uppercase tracking-wider shadow-neon-cyan hover:opacity-90 transition-all hover:scale-105"
@@ -355,6 +355,13 @@ export default function ProductsSection() {
                 <MessageSquare className="w-4 h-4" />
                 DM Staff / Request Item
               </button>
+              <a
+                href="#custom"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-neon-purple/50 bg-neon-purple/10 text-neon-purple font-bold text-xs uppercase tracking-wider hover:bg-neon-purple/20 transition-all"
+              >
+                <Sparkles className="w-4 h-4" />
+                Custom Order Form
+              </a>
             </div>
           </motion.div>
         </div>

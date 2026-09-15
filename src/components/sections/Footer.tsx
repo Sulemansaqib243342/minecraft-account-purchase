@@ -12,11 +12,10 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <h3 className="text-xl font-bold font-display text-neon-green mb-3 text-glow-green">
-              Minecraft Account Purchase
+              Gaming Zone Store
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed max-w-md">
-              Your trusted source for premium gaming accounts, tools & subscriptions. Fast, affordable,
-              and secure transactions via email & Discord support.
+              Your ultimate marketplace for premium gaming accounts, digital tools, subscriptions, VCCs & custom orders. Fast, affordable, and secure transactions via Email & Discord support.
             </p>
           </div>
 
@@ -56,7 +55,7 @@ export default function Footer() {
         {/* Divider & Disclaimer */}
         <div className="border-t border-white/5 pt-8">
           <p className="text-gray-500 text-xs text-center leading-relaxed max-w-3xl mx-auto">
-            © 2024 Minecraft Account Purchase. All rights reserved. This website
+            © 2024 Gaming Zone Store. All rights reserved. This website
             is not affiliated with Mojang, Microsoft, Valve, or any game
             developer. All product names, logos, and brands are property of their
             respective owners.

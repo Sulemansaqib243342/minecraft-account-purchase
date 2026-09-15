@@ -30,7 +30,7 @@ export default function HeroSection() {
             transition={{ delay: 0.2, duration: 0.5 }}
             className="inline-block px-4 py-1.5 rounded-full border border-neon-green/30 bg-neon-green/10 text-neon-green text-sm font-semibold mb-6"
           >
-            🎮 Premium Gaming Marketplace
+            🎮 Gaming Accounts, Digital Tools & Custom Orders
           </motion.div>
 
           {/* Title */}
@@ -41,10 +41,10 @@ export default function HeroSection() {
             className="text-4xl md:text-6xl lg:text-7xl font-bold font-display mb-6 leading-tight"
           >
             <span className="bg-gradient-to-r from-neon-green via-neon-cyan to-neon-purple bg-clip-text text-transparent">
-              Buy Premium Gaming
+              Premium Gaming & Tools
             </span>
             <br />
-            <span className="text-white">Accounts Instantly</span>
+            <span className="text-white">Store & Custom Deals</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -52,10 +52,11 @@ export default function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed"
           >
-            Affordable, fast delivery, and secure deals. Get your favorite game
-            accounts in seconds.
+            Xbox Game Pass, Steam, Minecraft, Netflix, Crunchyroll, VCCs, Hotmail Tools & Discord Nitro!
+            <br />
+            <span className="text-neon-cyan font-semibold">✨ Or you can make a custom order for any tool or account!</span>
           </motion.p>
 
           {/* CTA Buttons */}
@@ -65,12 +66,16 @@ export default function HeroSection() {
             transition={{ delay: 0.9, duration: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <NeonButton variant="green" size="lg">
-              Buy Now
-            </NeonButton>
-            <NeonButton variant="purple" size="lg">
-              View Accounts
-            </NeonButton>
+            <a href="#products">
+              <NeonButton variant="green" size="lg">
+                Explore Catalog
+              </NeonButton>
+            </a>
+            <a href="#custom">
+              <NeonButton variant="purple" size="lg">
+                Make Custom Order ✨
+              </NeonButton>
+            </a>
           </motion.div>
         </motion.div>
 

@@ -21,7 +21,7 @@ export default function Navbar() {
           href="/"
           className="text-lg font-bold font-display text-neon-green text-glow-green tracking-wide flex items-center gap-2"
         >
-          <span>MC Accounts</span>
+          <span>Gaming Zone</span>
         </Link>
 
         {/* Nav Links (desktop) */}

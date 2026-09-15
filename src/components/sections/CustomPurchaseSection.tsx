@@ -69,17 +69,17 @@ export default function CustomPurchaseSection() {
             <div className="relative glass-strong rounded-3xl p-8 md:p-12 text-center">
               {/* Badge */}
               <div className="inline-block px-3 py-1 rounded-full border border-neon-cyan/30 bg-neon-cyan/10 text-neon-cyan text-xs font-semibold uppercase tracking-wider mb-6">
-                Custom Orders & Inquiries
+                ✨ Custom Orders & Inquiries
               </div>
 
               <h2 className="text-3xl md:text-4xl font-bold font-display mb-4">
-                <span className="bg-gradient-to-r from-neon-purple to-neon-cyan bg-clip-text text-transparent">
-                  Get In Touch
+                <span className="bg-gradient-to-r from-neon-purple via-neon-cyan to-neon-green bg-clip-text text-transparent">
+                  Make A Custom Order
                 </span>
               </h2>
 
-              <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
-                👉 Need a custom Game Pass, Steam, or Minecraft account deal? Fill in your details below and our support team will email you back!
+              <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+                👉 Need a custom account package, unlisted tool, bulk order, or specific service deal? Fill in your details below and our support team will contact you directly via email!
               </p>
 
               {submitted ? (

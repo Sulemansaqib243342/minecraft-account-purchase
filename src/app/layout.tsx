@@ -14,9 +14,9 @@ const orbitron = Orbitron({
 });
 
 export const metadata: Metadata = {
-  title: 'Minecraft Account Purchase | Premium Gaming Accounts',
+  title: 'Gaming Zone | Premium Accounts, Tools & Custom Orders',
   description:
-    'Buy premium gaming accounts instantly. Affordable, fast delivery, and secure deals.',
+    'Your ultimate marketplace for premium gaming accounts, digital tools, subscriptions, VCCs & custom orders.',
 };
 
 export default function RootLayout({
